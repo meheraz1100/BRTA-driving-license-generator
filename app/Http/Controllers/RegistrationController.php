@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Application;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class RegistrationController extends Controller
 {
@@ -10,244 +12,364 @@ class RegistrationController extends Controller
     {
         return view('registration.create');
     }
+    
 
     public function store(Request $request)
-{
-    $validated = $request->validate([
+    {
+        $validated = $request->validate([
 
-    // Personal Information
-    'nid' => ['required', 'digits:10'],
-    'date_of_birth' => ['required', 'date'],
+            // Personal Information
+            'nid' => [
+                'required',
+                'digits_between:10,17',
+            ],
 
-    'name_english' => ['required', 'string', 'max:100'],
-    'name_bangla' => ['required', 'string', 'max:100'],
+            'date_of_birth' => [
+                'required',
+                'date',
+            ],
 
-    'father_name_english' => ['required', 'string', 'max:100'],
-    'father_name_bangla' => ['required', 'string', 'max:100'],
+            'name_english' => [
+                'required',
+                'string',
+                'max:100',
+            ],
 
-    'mother_name_english' => ['required', 'string', 'max:100'],
-    'mother_name_bangla' => ['required', 'string', 'max:100'],
+            'name_bangla' => [
+                'required',
+                'string',
+                'max:100',
+            ],
 
-    'gender' => ['required', 'in:male,female,other'],
+            'father_name_english' => [
+                'required',
+                'string',
+                'max:100',
+            ],
 
-    'marital_status' => [
-        'required',
-        'in:single,married,divorced,widowed'
-    ],
+            'father_name_bangla' => [
+                'required',
+                'string',
+                'max:100',
+            ],
 
-    'spouse_name_english' => [
-        'nullable',
-        'required_if:marital_status,married',
-        'string',
-        'max:100'
-    ],
+            'mother_name_english' => [
+                'required',
+                'string',
+                'max:100',
+            ],
 
-    'spouse_name_bangla' => [
-        'nullable',
-        'required_if:marital_status,married',
-        'string',
-        'max:100'
-    ],
+            'mother_name_bangla' => [
+                'required',
+                'string',
+                'max:100',
+            ],
 
-    'occupation' => ['required', 'string', 'max:100'],
+            'gender' => [
+                'required',
+                'in:male,female,other',
+            ],
 
-    'blood_group' => [
-        'required',
-        'in:A+,A-,B+,B-,AB+,AB-,O+,O-'
-    ],
+            'marital_status' => [
+                'required',
+                'in:single,married,divorced,widowed',
+            ],
 
+            'spouse_name_english' => [
+                'nullable',
+                'required_if:marital_status,married',
+                'string',
+                'max:100',
+            ],
 
-    // Present Address
-    'present_village' => [
-        'required',
-        'string',
-        'max:150'
-    ],
+            'spouse_name_bangla' => [
+                'nullable',
+                'required_if:marital_status,married',
+                'string',
+                'max:100',
+            ],
 
-    'present_road' => [
-        'nullable',
-        'string',
-        'max:150'
-    ],
+            'occupation' => [
+                'required',
+                'string',
+                'max:100',
+            ],
 
-    'present_division' => [
-        'required',
-        'string'
-    ],
-
-    'present_district' => [
-        'required',
-        'string'
-    ],
-
-    'present_thana' => [
-        'required',
-        'string'
-    ],
-
-    'present_post_code' => [
-        'required',
-        'digits:4'
-    ],
-
-
-    // Permanent Address
-    'permanent_village' => [
-        'required',
-        'string',
-        'max:150'
-    ],
-
-    'permanent_road' => [
-        'nullable',
-        'string',
-        'max:150'
-    ],
-
-    'permanent_division' => [
-        'required',
-        'string'
-    ],
-
-    'permanent_district' => [
-        'required',
-        'string'
-    ],
-
-    'permanent_thana' => [
-        'required',
-        'string'
-    ],
-
-    'permanent_post_code' => [
-        'required',
-        'digits:4'
-    ],
-    // Citizenship
-    'nationality' => [
-        'required',
-        'string',
-        'max:50',
-    ],
-
-    'has_other_citizenship' => [
-        'required',
-        'in:no,yes',
-    ],
-
-    'other_citizenship' => [
-        'nullable',
-        'required_if:has_other_citizenship,yes',
-        'string',
-        'max:100',
-    ],
+            'blood_group' => [
+                'required',
+                'in:A+,A-,B+,B-,AB+,AB-,O+,O-',
+            ],
 
 
-    // Applicant Contact
-    'phone_residence' => [
-        'nullable',
-        'string',
-        'max:20',
-    ],
+            // Present Address
+            'present_village' => [
+                'required',
+                'string',
+                'max:150',
+            ],
 
-    'mobile' => [
-        'required',
-        'regex:/^01[3-9]\d{8}$/',
-    ],
+            'present_road' => [
+                'nullable',
+                'string',
+                'max:150',
+            ],
 
-    'phone_office' => [
-        'nullable',
-        'string',
-        'max:20',
-    ],
+            'present_division' => [
+                'required',
+                'string',
+            ],
 
-    'email' => [
-        'required',
-        'email',
-        'max:255',
-    ],
+            'present_district' => [
+                'required',
+                'string',
+            ],
+
+            'present_thana' => [
+                'required',
+                'string',
+            ],
+
+            'present_post_code' => [
+                'required',
+                'digits:4',
+            ],
 
 
-    // Emergency Contact
-    'emergency_name' => [
-        'required',
-        'string',
-        'max:100',
-    ],
+            // Permanent Address
+            'permanent_village' => [
+                'required',
+                'string',
+                'max:150',
+            ],
 
-    'emergency_relationship' => [
-        'required',
-        'string',
-        'max:50',
-    ],
+            'permanent_road' => [
+                'nullable',
+                'string',
+                'max:150',
+            ],
 
-    'emergency_mobile' => [
-        'required',
-        'regex:/^01[3-9]\d{8}$/',
-    ],
+            'permanent_division' => [
+                'required',
+                'string',
+            ],
 
-    'emergency_email' => [
-        'nullable',
-        'email',
-        'max:255',
-    ],
+            'permanent_district' => [
+                'required',
+                'string',
+            ],
 
-    // Licensing & Examination
-    'license_type' => [
-        'required',
-        'in:non_professional,professional',
-    ],
+            'permanent_thana' => [
+                'required',
+                'string',
+            ],
 
-    'instructor_license_no' => [
-        'required',
-        'string',
-        'max:50',
-    ],
+            'permanent_post_code' => [
+                'required',
+                'digits:4',
+            ],
 
-    'exam_venue' => [
-        'required',
-        'string',
-        'max:100',
-    ],
 
-    'vehicle_class' => [
-        'required',
-        'array',
-        'min:1',
-    ],
+            // Citizenship
+            'nationality' => [
+                'required',
+                'string',
+                'max:50',
+            ],
 
-    'vehicle_class.*' => [
-        'string',
-        'in:motorcycle,light',
-        'distinct',
-    ],
+            'has_other_citizenship' => [
+                'required',
+                'in:no,yes',
+            ],
 
-    // Attachments
-    'applicant_photo' => [
-        'required',
-        'image',
-        'mimes:jpg,jpeg,png',
-        'max:2048',
-    ],
+            'other_citizenship' => [
+                'nullable',
+                'required_if:has_other_citizenship,yes',
+                'string',
+                'max:100',
+            ],
 
-    'nid_document' => [
-        'required',
-        'file',
-        'mimes:jpg,jpeg,png,pdf',
-        'max:5120',
-    ],
 
-    'medical_certificate' => [
-        'nullable',
-        'file',
-        'mimes:jpg,jpeg,png,pdf',
-        'max:5120',
-    ],
-]);
+            // Applicant Contact
+            'phone_residence' => [
+                'nullable',
+                'string',
+                'max:20',
+            ],
 
-    return back()->with(
-        'success',
-        'Personal information is valid!'
-    );
-}
+            'mobile' => [
+                'required',
+                'regex:/^01[3-9]\d{8}$/',
+            ],
+
+            'phone_office' => [
+                'nullable',
+                'string',
+                'max:20',
+            ],
+
+            'email' => [
+                'required',
+                'email',
+                'max:255',
+            ],
+
+
+            // Emergency Contact
+            'emergency_name' => [
+                'required',
+                'string',
+                'max:100',
+            ],
+
+            'emergency_relationship' => [
+                'required',
+                'string',
+                'max:50',
+            ],
+
+            'emergency_mobile' => [
+                'required',
+                'regex:/^01[3-9]\d{8}$/',
+            ],
+
+            'emergency_email' => [
+                'nullable',
+                'email',
+                'max:255',
+            ],
+
+
+            // Licensing & Examination
+            'license_type' => [
+                'required',
+                'in:non_professional,professional',
+            ],
+
+            'instructor_license_no' => [
+                'required',
+                'string',
+                'max:50',
+            ],
+
+            'exam_venue' => [
+                'required',
+                'string',
+                'max:100',
+            ],
+
+            'vehicle_class' => [
+                'required',
+                'array',
+                'min:1',
+            ],
+
+            'vehicle_class.*' => [
+                'string',
+                'in:motorcycle,light',
+                'distinct',
+            ],
+
+
+            // Attachments
+            'applicant_photo' => [
+                'required',
+                'image',
+                'mimes:jpg,jpeg,png',
+                'max:2048',
+            ],
+
+            'nid_document' => [
+                'required',
+                'file',
+                'mimes:jpg,jpeg,png,pdf',
+                'max:5120',
+            ],
+
+            'medical_certificate' => [
+                'nullable',
+                'file',
+                'mimes:jpg,jpeg,png,pdf',
+                'max:5120',
+            ],
+        ]);
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Upload Files
+        |--------------------------------------------------------------------------
+        */
+
+        $photoPath = $request
+            ->file('applicant_photo')
+            ->store('applications/photos', 'public');
+
+
+        $nidDocumentPath = $request
+            ->file('nid_document')
+            ->store('applications/nid-documents', 'public');
+
+
+        $medicalCertificatePath = null;
+
+        if ($request->hasFile('medical_certificate')) {
+
+            $medicalCertificatePath = $request
+                ->file('medical_certificate')
+                ->store('applications/medical-certificates', 'public');
+        }
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Generate Application Number
+        |--------------------------------------------------------------------------
+        */
+
+        $applicationNo = 'LL-' .
+            now()->format('Y') .
+            '-' .
+            strtoupper(Str::random(6));
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Save Application  
+        |--------------------------------------------------------------------------
+        */
+
+        $application = Application::create([
+
+            ...$validated,
+
+            'application_no' => $applicationNo,
+
+            'applicant_photo' => $photoPath,
+
+            'nid_document' => $nidDocumentPath,
+
+            'medical_certificate' => $medicalCertificatePath,
+        ]);
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Success Response
+        |--------------------------------------------------------------------------
+        */
+
+        return redirect()
+    ->route('application.success', $application)
+    ->with('success', 'Application submitted successfully!');
+    }
+
+    public function success(Application $application)
+    {
+        return view('registration.success', compact('application'));
+    }
+
+    public function license(Application $application)
+    {
+        return view('registration.license', compact('application'));
+    }
 }
