@@ -10,6 +10,7 @@
     </title>
 
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
 
     <style>
         @page {
@@ -34,12 +35,10 @@
             overflow: hidden;
             border-radius: 28px;
             background:
-                linear-gradient(
-                    135deg,
+                linear-gradient(135deg,
                     #f8fafc 0%,
                     #eef2f7 45%,
-                    #dbeafe 100%
-                );
+                    #dbeafe 100%);
             box-shadow:
                 0 30px 60px rgba(15, 23, 42, 0.22);
         }
@@ -49,16 +48,12 @@
             position: absolute;
             inset: 0;
             background:
-                radial-gradient(
-                    circle at 15% 15%,
+                radial-gradient(circle at 15% 15%,
                     rgba(59, 130, 246, 0.15),
-                    transparent 32%
-                ),
-                radial-gradient(
-                    circle at 90% 90%,
+                    transparent 32%),
+                radial-gradient(circle at 90% 90%,
                     rgba(14, 116, 144, 0.12),
-                    transparent 35%
-                );
+                    transparent 35%);
             pointer-events: none;
         }
 
@@ -122,20 +117,16 @@
 
         .back-pattern {
             background-image:
-                linear-gradient(
-                    45deg,
+                linear-gradient(45deg,
                     rgba(30, 64, 175, .035) 25%,
                     transparent 25%,
                     transparent 75%,
-                    rgba(30, 64, 175, .035) 75%
-                ),
-                linear-gradient(
-                    -45deg,
+                    rgba(30, 64, 175, .035) 75%),
+                linear-gradient(-45deg,
                     rgba(30, 64, 175, .035) 25%,
                     transparent 25%,
                     transparent 75%,
-                    rgba(30, 64, 175, .035) 75%
-                );
+                    rgba(30, 64, 175, .035) 75%);
             background-size: 36px 36px;
         }
 
@@ -173,24 +164,14 @@
 
 <body>
 
-    <!-- Controls -->
+<!-- Controls -->
     <div class="no-print flex justify-center gap-3 py-8">
 
-        <a
-            href="{{ route('application.success', $application) }}"
-            class="rounded-lg bg-slate-800 px-5 py-2.5 text-sm font-semibold text-white hover:bg-slate-700"
-        >
-            ← Back
-        </a>
-
-        <button
-            onclick="window.print()"
-            class="rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-blue-700"
-        >
-            Print / Save PDF
-        </button>
+        <p>Hey, {{ $application->name_english }}. Download Your Driving License and Fly in Your Road.</p>
 
     </div>
+
+    
 
 
     <!-- ========================= -->
@@ -199,39 +180,84 @@
 
     <div class="flex justify-center pb-10">
 
-        <div class="card">
+        <div class="card back-pattern">
 
-            <div class="security-line"></div>
+            <div class="security-line absolute inset-2 z-50 pointer-events-none"></div>
 
-            
+
 
 
             <!-- Header -->
 
-            <div class="relative z-10 flex items-center px-10 pt-8">
+            <!-- <div
+    class="relative z-10 flex items-center px-10 pt-8"
+    style="background: radial-gradient(
+        ellipse at center,
+        #86efac 0%,
+        #bbf7d0 15%,
+        #dcfce7 80%,
+        #f0fdf4 100%
+    );"
+> -->
+            <div
+                class="relative z-10 flex items-center px-10 pt-8"
+                style="background: radial-gradient(
+        ellipse at center,
+        #a7f3d0 0%,
+        #d1fae5 35%,
+        #ecfdf5 70%,
+        #f0fdf4 100%
+    );">
 
-                <div class="h-14 w-14 rounded-xl overflow-hidden shadow-lg">
-    <img
-        src="{{ asset('/storage/asset/images/brta-logo.png') }}"
-        alt="DL Logo"
-        class="h-full w-full object-cover"
-    >
-</div>
+                <!-- BRTA Logo -->
+                <div class="h-14 w-14 overflow-hidden rounded-full shadow-lg">
+                    <img
+                        src="{{ asset('/storage/asset/images/brta-logo.png') }}"
+                        alt="DL Logo"
+                        class="h-full w-full object-cover">
+                </div>
 
-                <div class="ml-4">
+                <div class="ml-4 flex w-full items-center justify-between">
 
-                    <div class="text-2xl font-black tracking-tight text-slate-900">
-                         মোটর ড্রাইভিং লাইসেন্স
+                    <!-- Left -->
+                    <div>
+                        <div class="text-3xl font-black tracking-tight text-slate-900" style="font-family: 'Nikosh', sans-serif;">
+                            মোটর ড্রাইভিং লাইসেন্স
+                        </div>
+
+                        <div class="text-xs font-bold text-slate-500">
+                            Motor Driving License
+                        </div>
                     </div>
-                    <div class="text-xs font-bold uppercase tracking-[3px] text-slate-500">
-                        MOTOR DRIVING LICENSE
+
+                    <!-- Right -->
+                    <div class="flex items-center">
+
+                        <!-- Government Text -->
+                        <div class="text-right">
+                            <div class="text-3xl font-black tracking-tight text-slate-900" style="font-family: 'Nikosh', sans-serif;">
+                                গণপ্রজাতন্ত্রী বাংলাদেশ
+                            </div>
+
+                            <div class="text-xs font-bold text-slate-500">
+                                People's Republic of Bangladesh
+                            </div>
+                        </div>
+
+                        <!-- Bangladesh Logo -->
+                        <div class="ml-2 h-14 w-14 overflow-hidden rounded-full shadow-lg">
+                            <img
+                                src="{{ asset('/storage/asset/images/bd.png') }}"
+                                alt="Bangladesh Logo"
+                                class="h-full w-full object-cover">
+                        </div>
 
                     </div>
-
 
                 </div>
 
             </div>
+            <div class="h-1 w-full mt-1 bg-green-600"></div>
 
 
             <!-- Main Content -->
@@ -245,22 +271,22 @@
                     <div class="photo-frame">
 
                         @if ($application->applicant_photo)
-                            <img
-                                src="{{ asset('storage/' . $application->applicant_photo) }}"
-                                alt="Applicant Photo"
-                            >
+                        <img
+                            src="{{ asset('storage/' . $application->applicant_photo) }}"
+                            alt="Applicant Photo">
                         @else
 
-                            <div class="flex h-full items-center justify-center text-xs text-slate-400">
-                                NO PHOTO
-                            </div>
+                        <div class="flex h-full items-center justify-center text-xs text-slate-400">
+                            NO PHOTO
+                        </div>
 
                         @endif
 
                     </div>
 
-                    <div class="mt-2 text-center text-[9px] font-bold uppercase tracking-wider text-slate-500">
-                        Applicant Photo
+                    <div class="mt-12 text-center text-[15px] text-slate-700"
+                        style="font-family: 'Brush Script MT', 'Segoe Script', cursive;">
+                        {{ $application->name_english }}
                     </div>
 
                 </div>
@@ -270,25 +296,23 @@
 
                 <div class="flex-1">
 
-                    <div class="grid grid-cols-2 gap-x-8 gap-y-5">
+                    <div class="grid grid-cols-2 gap-x-6 gap-y-6">
 
                         <div class="col-span-2">
 
-                            <div class="label">
-                                Full Name
+                            <div class="label text-[#752c41]" style="font-family: Arial, sans-serif;">
+                                নাম / Name
                             </div>
 
-                            <div class="text-[23px] font-black uppercase text-slate-950">
+                            <div class=" font-black uppercase text-slate-950">
                                 {{ $application->name_english }}
                             </div>
 
                         </div>
+                        <div class="col-span-2">
 
-
-                        <div>
-
-                            <div class="label">
-                                Date of Birth
+                            <div class="label text-[#752c41]">
+                                জন্ম তারিখ / Date of Birth
                             </div>
 
                             <div class="value">
@@ -296,12 +320,10 @@
                             </div>
 
                         </div>
+                        <div class="col-span-2">
 
-
-                        <div>
-
-                            <div class="label">
-                                Blood Group
+                            <div class="label text-[#752c41]">
+                                রক্তের গ্রুপ / Blood Group
                             </div>
 
                             <div class="value">
@@ -311,111 +333,82 @@
                         </div>
 
 
-                        <div>
+                        <!-- <div>
 
                             <div class="label">
-                                Gender
-                            </div>
-
-                            <div class="value capitalize">
-                                {{ $application->gender }}
-                            </div>
-
-                        </div>
-
-
-                        <div>
-
-                            <div class="label">
-                                License Type
+                                জন্ম তারিখ / Date of Birth
                             </div>
 
                             <div class="value">
-                                {{ $application->license_type === 'professional'
-                                    ? 'Professional'
-                                    : 'Non-Professional' }}
+                                {{ $application->date_of_birth?->format('d M Y') }}
                             </div>
 
-                        </div>
-
+                        </div> -->
 
                         <div class="col-span-2">
 
-                            <div class="label">
-                                Father / Husband Name
+                            <div class="label text-[#752c41]">
+                                পিতা/স্বামী / Father/Husband Name
                             </div>
 
                             <div class="value uppercase">
                                 {{ $application->father_name_english }}
 
                                 @if($application->spouse_name_english)
-                                    / {{ $application->spouse_name_english }}
+                                / {{ $application->spouse_name_english }}
                                 @endif
                             </div>
 
                         </div>
 
-                    </div>
 
-                </div>
+                        <div>
 
-            </div>
+                            <div class="label text-[#752c41]">
+                                প্রদান/নবায়ন / Issue/Renewal
+                            </div>
 
+                            <div class="value capitalize">
+                                {{ now()->format('d/m/Y') }}
+                            </div>
 
-            <!-- Bottom Information -->
+                        </div>
+                        <div>
 
-            <div class="absolute bottom-0 left-0 right-0 z-10 bg-slate-950 px-10 py-6">
+                            <div class="label text-[#752c41]">
+                                মেয়াদ / Validity
+                            </div>
 
-                <div class="grid grid-cols-4 gap-6 text-white">
+                            <div class="value">
+                                {{ now()->addYears(3)->format('d/m/Y') }}
+                            </div>
 
-                    <div>
+                        </div>
+                        <div>
 
-                        <div class="text-[9px] font-bold uppercase tracking-wider text-slate-400">
-                            Application No.
+                            <div class="label text-[#752c41]">
+                                লাইসেন্স নং / License No.
+                            </div>
+
+                            <div class="value capitalize">
+                                {{ $application->application_no }}
+                            </div>
+
+                        </div>
+                        <div>
+
+                            <div class="label text-[#752c41]">
+                                প্রদানকারী কর্তৃপক্ষ / Issuing Authority
+                            </div>
+
+                            <div class="value uppercase">
+                                brta, {{ $application->present_district }}
+                            </div>
+
                         </div>
 
-                        <div class="mt-1 text-sm font-black">
-                            {{ $application->application_no }}
-                        </div>
-
-                    </div>
-
-
-                    <div>
-
-                        <div class="text-[9px] font-bold uppercase tracking-wider text-slate-400">
-                            Issue Date
-                        </div>
-
-                        <div class="mt-1 text-sm font-black">
-                            {{ $application->created_at->format('d M Y') }}
-                        </div>
-
-                    </div>
-
-
-                    <div>
-
-                        <div class="text-[9px] font-bold uppercase tracking-wider text-slate-400">
-                            Vehicle Class
-                        </div>
-
-                        <div class="mt-1 text-sm font-black uppercase">
-                            {{ implode(', ', $application->vehicle_class ?? []) }}
-                        </div>
-
-                    </div>
-
-
-                    <div>
-
-                        <div class="text-[9px] font-bold uppercase tracking-wider text-slate-400">
-                            Status
-                        </div>
-
-                        <div class="mt-1 text-sm font-black text-emerald-400">
-                            APPLICATION APPROVED
-                        </div>
+                        <p class="text-[#752c41]" style="font-family: Arial, Helvetica, sans-serif;
+font-weight: 500;">Bangladesh Road Transport Authority</p>
 
                     </div>
 
@@ -439,24 +432,14 @@
 
             <div class="security-line"></div>
 
-            
 
-            
+
+
 
 
             <!-- Header -->
 
-            <div class="relative z-10 px-10 pt-9">
 
-                <div class="text-xs font-bold uppercase tracking-[3px] text-slate-500">
-                    Applicant Information
-                </div>
-
-                <div class="mt-1 text-2xl font-black text-slate-900">
-                    LICENSE DETAILS
-                </div>
-
-            </div>
 
 
             <!-- Information Grid -->
@@ -466,18 +449,14 @@
 
                 <!-- Address -->
 
-                <div class="col-span-2 rounded-xl border border-slate-200 bg-white/75 p-4">
-
-                    <div class="label">
-                        Present Address
-                    </div>
+                <!-- <div class="col-span-2 rounded-xl border border-slate-200 bg-white/75 p-4">
 
                     <div class="mt-1 text-sm font-semibold leading-6 text-slate-800">
-
+                        
                         {{ $application->present_village }}
 
                         @if($application->present_road)
-                            , {{ $application->present_road }}
+                        , {{ $application->present_road }}
                         @endif
 
                         , {{ $application->present_thana }}
@@ -488,6 +467,14 @@
 
                     </div>
 
+                </div> -->
+
+                <div class="col-span-2 rounded-xl  bg-white/50 p-1">
+
+                    <svg
+                        id="application-barcode"
+                        class="h-16 w-full"></svg>
+
                 </div>
 
 
@@ -495,13 +482,12 @@
 
                 <div>
 
-                    <div class="label">
-                        Mobile
-                    </div>
+                    <img
+                        src="{{ asset('/storage/asset/images/sim.png') }}"
+                        alt="Mobile"
+                        class="ml-5 h-20 w-30 object-contain">
 
-                    <div class="mini-value">
-                        {{ $application->mobile }}
-                    </div>
+
 
                 </div>
 
@@ -511,105 +497,49 @@
                 <div>
 
                     <div class="label">
-                        Email
+                        Address
                     </div>
 
                     <div class="mini-value">
-                        {{ $application->email }}
+                        {{ $application->present_village }}
+
+                        @if($application->present_road)
+                        , {{ $application->present_road }}
+                        @endif
+
+                        , {{ $application->present_thana }}
+                        , {{ $application->present_district }}
+                        , {{ $application->present_division }}
+
+                        - {{ $application->present_post_code }}
                     </div>
 
                 </div>
 
 
-                <!-- Emergency -->
+                <!-- Chip and Address -->
 
-                <div class="col-span-2 rounded-xl border border-slate-200 bg-white/75 p-4">
-
-                    <div class="mb-3 text-[10px] font-black uppercase tracking-wider text-slate-500">
-                        Emergency Contact
-                    </div>
-
-                    <div class="grid grid-cols-3 gap-5">
-
-                        <div>
-
-                            <div class="label">
-                                Name
-                            </div>
-
-                            <div class="mini-value">
-                                {{ $application->emergency_name }}
-                            </div>
-
-                        </div>
-
-
-                        <div>
-
-                            <div class="label">
-                                Relationship
-                            </div>
-
-                            <div class="mini-value capitalize">
-                                {{ $application->emergency_relationship }}
-                            </div>
-
-                        </div>
-
-
-                        <div>
-
-                            <div class="label">
-                                Mobile
-                            </div>
-
-                            <div class="mini-value">
-                                {{ $application->emergency_mobile }}
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
 
 
                 <!-- Vehicle Classes -->
 
-                <div class="col-span-2">
+                
 
-                    <div class="label mb-2">
-                        Permitted Vehicle Classes
-                    </div>
-
-                    <div class="flex gap-3">
-
-                        @foreach($application->vehicle_class ?? [] as $vehicle)
-
-                            <div class="rounded-lg border border-slate-300 bg-white px-5 py-2 text-xs font-black uppercase text-slate-800">
-
-                                {{ $vehicle }}
-
-                            </div>
-
-                        @endforeach
-
-                    </div>
-
-                </div>
 
 
                 <!-- Reference -->
 
                 <div>
+                    <div class=" text-[#752c41] col-span-2">
+                    Prefix of the licence number is district code and suffix is symbol of authorized vehicle class.
+                    If lost or found, please inform Police Station.
+                    Red background - Professional
+                    Green background - Non-professional
+                </div>
 
-                    <div class="label">
-                        Reference No.
-                    </div>
-
-                    <div class="mini-value">
-                        {{ $application->application_no }}
-                    </div>
+                    <svg
+                        id="application-barcode"
+                        class="h-20 w-full"></svg>
 
                 </div>
 
@@ -618,13 +548,13 @@
 
                 <div>
 
-                    <div class="label">
-                        Instructor License
-                    </div>
-
-                    <div class="mini-value">
-                        {{ $application->instructor_license_no }}
-                    </div>
+                    <img
+                        src="{{ asset('/storage/asset/images/v-class.jpg') }}"
+                        alt="Mobile"
+                        class="ml-5  h-40 rounded-xl object-contain">
+                    
+                    <p class="ml-5">Ref. No. {{ $application->application_no }}</p>
+                    <p class="ml-5">First Issue {{ now()->format('d/m/Y') }}</p>
 
                 </div>
 
@@ -633,11 +563,11 @@
 
             <!-- Footer -->
 
-            <div class="absolute bottom-0 left-0 right-0 z-10 border-t border-slate-300 bg-white/90 px-10 py-5">
+            <!-- <div class="absolute bottom-0 left-0 right-0 z-10 border-t border-slate-300 bg-white/90 px-10 py-5">
 
                 <div class="flex items-center justify-between">
 
-                    <div class="max-w-[620px]">
+                    <div class="max-w-155">
 
                         <div class="text-[10px] font-black uppercase tracking-wider text-green-600">
                             A VALID DRIVING LICENCE
@@ -645,8 +575,8 @@
 
                         <div class="mt-1 text-[9px] leading-4 text-slate-500">
 
-                            
-                            It is an official government 
+
+                            It is an official government
                             driving licence document.
 
                         </div>
@@ -672,12 +602,62 @@
 
                 </div>
 
-            </div>
+            </div> -->
 
         </div>
 
+        
+
     </div>
 
+
+    <!-- Controls -->
+    <div class="no-print flex justify-center gap-3 py-8">
+
+        <a
+            href="{{ route('application.success', $application) }}"
+            class="rounded-lg bg-slate-800 px-5 py-2.5 text-sm font-semibold text-white hover:bg-slate-700">
+            ← Back
+        </a>
+
+        <button
+            onclick="window.print()"
+            class="rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-blue-700">
+            Print / Save PDF
+        </button>
+
+    </div>
+
+    @php
+    $barcodeData =
+    $application->application_no
+    . ' | '
+    . $application->present_village
+    . ($application->present_road ? ', ' . $application->present_road : '')
+    . ', ' . $application->present_thana
+    . ', ' . $application->present_district
+    . ', ' . $application->present_division
+    . ' - ' . $application->present_post_code;
+    @endphp
+
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            JsBarcode('#application-barcode', @json($barcodeData), {
+                format: 'CODE128',
+                width: 2,
+                height: 55,
+                displayValue: false,
+                margin: 0,
+                background: 'transparent'
+            });
+
+        });
+    </script>
 </body>
 
 </html>
