@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Application;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Gate;
 
 class RegistrationController extends Controller
 {
@@ -12,7 +13,16 @@ class RegistrationController extends Controller
     {
         return view('registration.create');
     }
-    
+
+    public function myApplications()
+    {
+        $applications = Application::where('user_id', auth()->id())
+            ->latest()
+            ->get();
+
+        return view('registration.my-applications', compact('applications'));
+    }
+
 
     public function store(Request $request)
     {
@@ -339,15 +349,13 @@ class RegistrationController extends Controller
         */
 
         $application = Application::create([
-
             ...$validated,
 
+            'user_id' => auth()->id(),
+
             'application_no' => $applicationNo,
-
             'applicant_photo' => $photoPath,
-
             'nid_document' => $nidDocumentPath,
-
             'medical_certificate' => $medicalCertificatePath,
         ]);
 
@@ -359,17 +367,21 @@ class RegistrationController extends Controller
         */
 
         return redirect()
-    ->route('application.success', $application)
-    ->with('success', 'Application submitted successfully!');
+            ->route('application.success', $application)
+            ->with('success', 'Application submitted successfully!');
     }
 
     public function success(Application $application)
     {
+        Gate::authorize('view', $application);
+
         return view('registration.success', compact('application'));
     }
 
     public function license(Application $application)
     {
+        Gate::authorize('view', $application);
+
         return view('registration.license', compact('application'));
     }
 }
