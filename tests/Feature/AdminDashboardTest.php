@@ -36,4 +36,38 @@ class AdminDashboardTest extends TestCase
         $response->assertSee('LL-2026-TEST01');
         $response->assertSee('Test Applicant');
     }
+
+
+    public function test_admin_dashboard_only_shows_actions_for_pending_applications(): void
+    {
+        $admin = User::factory()->create([
+            'role' => 'admin',
+        ]);
+
+        $pendingApplication = Application::factory()->create([
+            'status' => 'pending',
+        ]);
+
+        $approvedApplication = Application::factory()->create([
+            'status' => 'approved',
+        ]);
+
+        $rejectedApplication = Application::factory()->create([
+            'status' => 'rejected',
+            'rejection_reason' => 'Invalid information.',
+        ]);
+
+        $response = $this->actingAs($admin)
+            ->get(route('admin.dashboard'));
+
+        $response->assertOk();
+
+        $response->assertSee('Approve');
+
+        $response->assertSee('Reject');
+
+        $response->assertSee($pendingApplication->application_no);
+        $response->assertSee($approvedApplication->application_no);
+        $response->assertSee($rejectedApplication->application_no);
+    }
 }

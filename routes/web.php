@@ -1,22 +1,23 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RegistrationController;
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ThemeController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
+Route::post('/theme', [ThemeController::class, 'update'])
+    ->name('theme.update');
 
 /*
 |--------------------------------------------------------------------------
 | Authentication
 |--------------------------------------------------------------------------
 */
-
-
 
 Route::middleware('guest')->group(function () {
 
@@ -36,7 +37,6 @@ Route::middleware('guest')->group(function () {
 Route::post('/logout', [AuthController::class, 'logout'])
     ->middleware('auth')
     ->name('logout');
-
 
 /*
 |--------------------------------------------------------------------------
@@ -81,3 +81,9 @@ Route::middleware(['auth', 'admin'])
         Route::post('/applications/{application}/reject', [AdminController::class, 'reject'])
             ->name('admin.applications.reject');
     });
+
+
+Route::get(
+    '/application/{application}/license/pdf',
+    [RegistrationController::class, 'licensePdf']
+)->name('application.license.pdf');

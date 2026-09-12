@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ApplicationApprovedMail;
 use App\Models\Application;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+
 
 class AdminController extends Controller
 {
@@ -24,12 +27,17 @@ class AdminController extends Controller
             'status' => 'approved',
         ]);
 
+        $application->load('user');
+
+        $recipient = $application->user?->email ?? $application->email;
+
+        Mail::to($recipient)->send(new ApplicationApprovedMail($application));
+
         return back()->with(
             'success',
             'Application approved successfully.'
         );
     }
-
 
     public function reject(Request $request, Application $application)
     {

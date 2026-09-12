@@ -6,6 +6,7 @@ use App\Models\Application;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Gate;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class RegistrationController extends Controller
 {
@@ -383,5 +384,22 @@ class RegistrationController extends Controller
         Gate::authorize('view', $application);
 
         return view('registration.license', compact('application'));
+    }
+
+    public function licensePdf(Application $application)
+    {
+        Gate::authorize('view', $application);
+
+        abort_unless($application->status === 'approved', 403);
+
+        $pdf = Pdf::loadView('registration.license-pdf', [
+            'application' => $application,
+        ]);
+
+        $pdf->setPaper('A4', 'landscape');
+
+        return $pdf->download(
+            'Learner-License-' . $application->application_no . '.pdf'
+        );
     }
 }

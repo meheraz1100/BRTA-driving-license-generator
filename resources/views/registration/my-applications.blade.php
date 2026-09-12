@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" @class(['dark' => ($theme ?? 'light') === 'dark'])>
 
 <head>
     <meta charset="UTF-8">
@@ -19,7 +19,9 @@
     ])
 </head>
 
-<body class="min-h-screen bg-gray-50">
+<body class="min-h-screen bg-gray-50 text-gray-900 dark:bg-slate-950 dark:text-slate-100">
+
+    <x-app-navbar />
 
     <div class="mx-auto max-w-6xl px-4 py-8">
 
@@ -27,7 +29,7 @@
         <div class="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
 
             <div>
-                <h1 class="text-2xl font-bold text-gray-800">
+                <h1 class="text-2xl font-bold text-gray-800 dark:text-white">
                     My Applications
                 </h1>
 
@@ -52,7 +54,7 @@
         @if ($applications->isEmpty())
 
             <!-- Empty State -->
-            <div class="rounded-xl border border-gray-200 bg-white p-10 text-center shadow-sm">
+            <div class="rounded-xl border border-gray-200 bg-white p-10 text-center shadow-sm dark:border-slate-700 dark:bg-slate-900">
 
                 <div class="mx-auto flex h-14 w-14 items-center justify-center
                             rounded-full bg-blue-50">
@@ -99,7 +101,7 @@
             <!-- Application Summary -->
             <div class="mb-5 grid grid-cols-1 gap-4 sm:grid-cols-3">
 
-                <div class="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+                <div class="rounded-xl border border-gray-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-900">
                     <p class="text-sm text-gray-500">
                         Total Applications
                     </p>
@@ -110,7 +112,7 @@
                 </div>
 
 
-                <div class="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+                <div class="rounded-xl border border-gray-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-900">
                     <p class="text-sm text-gray-500">
                         Pending
                     </p>
@@ -121,7 +123,7 @@
                 </div>
 
 
-                <div class="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+                <div class="rounded-xl border border-gray-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-900">
                     <p class="text-sm text-gray-500">
                         Approved
                     </p>
@@ -135,13 +137,13 @@
 
 
             <!-- Applications Table -->
-            <div class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+            <div class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900">
 
                 <div class="overflow-x-auto">
 
                     <table class="min-w-full divide-y divide-gray-200">
 
-                        <thead class="bg-gray-50">
+                        <thead class="bg-gray-50 dark:bg-slate-800">
 
                             <tr>
 
@@ -174,12 +176,12 @@
 
                             @foreach ($applications as $application)
 
-                                <tr class="transition hover:bg-gray-50">
+                                <tr class="transition hover:bg-gray-50 dark:hover:bg-slate-800/80">
 
                                     <!-- Application Number -->
                                     <td class="whitespace-nowrap px-6 py-5">
 
-                                        <div class="font-semibold text-gray-800">
+                                        <div class="font-semibold text-gray-800 dark:text-slate-100">
                                             {{ $application->application_no }}
                                         </div>
 

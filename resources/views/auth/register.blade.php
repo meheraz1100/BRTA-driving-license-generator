@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" @class(['dark' => ($theme ?? 'light') === 'dark'])>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,14 +9,18 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="min-h-screen bg-slate-100 flex items-center justify-center p-6">
+<body class="min-h-screen bg-slate-100 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+
+    <x-app-navbar />
+
+    <div class="flex justify-center p-6">
 
     <div class="w-full max-w-md">
 
-        <div class="bg-white rounded-2xl shadow-xl p-8">
+        <div class="bg-white rounded-2xl shadow-xl p-8 dark:bg-slate-900 dark:shadow-none dark:ring-1 dark:ring-white/10">
 
             <div class="text-center mb-8">
-                <h1 class="text-2xl font-bold text-slate-900">
+                <h1 class="text-2xl font-bold text-slate-900 dark:text-white">
                     Create Account
                 </h1>
 
@@ -117,6 +121,7 @@
 
         </div>
 
+    </div>
     </div>
 
 </body>

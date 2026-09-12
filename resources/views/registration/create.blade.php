@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" @class(['dark' => ($theme ?? 'light') === 'dark'])>
 
 <head>
     <meta charset="UTF-8">
@@ -8,10 +8,13 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="bg-gray-200">
+<body class="bg-gray-200 dark:bg-slate-950">
+
+<x-app-navbar />
+
 <div class="max-w-5xl mx-auto px-4 py-6">
 
-    <h1 class="text-xl font-bold text-gray-800 mb-4">
+    <h1 class="text-xl font-bold text-gray-800 mb-4 dark:text-white">
         Learner License Application
     </h1>
 
@@ -20,12 +23,12 @@
         @csrf
 
         <!-- TOP BAR: License Type + Photo -->
-        <div class="bg-white border border-gray-300 p-6 mb-4">
+        <div class="bg-white border border-gray-300 p-6 mb-4 dark:border-slate-700 dark:bg-slate-900">
             <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-8">
 
                 <!-- License Type -->
                 <div>
-                    <label class="block text-sm font-bold text-gray-800 mb-2">
+                    <label class="block text-sm font-bold text-gray-800 dark:text-slate-100 mb-2">
                         Driving License Type <span class="text-red-600">*</span>
                     </label>
 
@@ -95,7 +98,7 @@
         </div>
 
         <!-- SECTION A -->
-        <div class="bg-white border border-gray-300 p-6 mb-4">
+        <div class="bg-white border border-gray-300 p-6 mb-4 dark:border-slate-700 dark:bg-slate-900">
 
             <h2 class="text-base font-bold uppercase tracking-wide text-emerald-800 pb-2 border-b-2 border-emerald-700 mb-5">
                 Section A
@@ -105,7 +108,7 @@
 
                 <!-- NID -->
                 <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-                    <label for="nid" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 sm:text-right">
+                    <label for="nid" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 dark:text-slate-100 sm:text-right">
                         National Identity No <span class="text-red-600">*</span>
                     </label>
                     <div class="flex-1">
@@ -118,7 +121,7 @@
 
                 <!-- Date of Birth -->
                 <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-                    <label for="date_of_birth" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 sm:text-right">
+                    <label for="date_of_birth" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 dark:text-slate-100 sm:text-right">
                         Date Of Birth <span class="text-red-600">*</span>
                     </label>
                     <div class="flex-1">
@@ -130,7 +133,7 @@
 
                 <!-- Name English -->
                 <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-                    <label for="name_english" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 sm:text-right">
+                    <label for="name_english" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 dark:text-slate-100 sm:text-right">
                         Name(English) <span class="text-red-600">*</span>
                     </label>
                     <div class="flex-1">
@@ -142,7 +145,7 @@
 
                 <!-- Name Bangla -->
                 <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-                    <label for="name_bangla" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 sm:text-right">
+                    <label for="name_bangla" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 dark:text-slate-100 sm:text-right">
                         Name(Bangla)
                     </label>
                     <div class="flex-1">
@@ -155,7 +158,7 @@
 
                 <!-- Father's Name English -->
                 <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-                    <label for="father_name_english" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 sm:text-right">
+                    <label for="father_name_english" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 dark:text-slate-100 sm:text-right">
                         Father's Name(English) <span class="text-red-600">*</span>
                     </label>
                     <div class="flex-1">
@@ -167,7 +170,7 @@
 
                 <!-- Father's Name Bangla -->
                 <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-                    <label for="father_name_bangla" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 sm:text-right">
+                    <label for="father_name_bangla" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 dark:text-slate-100 sm:text-right">
                         Father's Name(Bangla)
                     </label>
                     <div class="flex-1">
@@ -179,7 +182,7 @@
 
                 <!-- Mother's Name English -->
                 <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-                    <label for="mother_name_english" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 sm:text-right">
+                    <label for="mother_name_english" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 dark:text-slate-100 sm:text-right">
                         Mother's Name(English) <span class="text-red-600">*</span>
                     </label>
                     <div class="flex-1">
@@ -191,7 +194,7 @@
 
                 <!-- Mother's Name Bangla -->
                 <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-                    <label for="mother_name_bangla" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 sm:text-right">
+                    <label for="mother_name_bangla" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 dark:text-slate-100 sm:text-right">
                         Mother's Name(Bangla)
                     </label>
                     <div class="flex-1">
@@ -203,7 +206,7 @@
 
                 <!-- Gender -->
                 <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-                    <label class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 sm:text-right">
+                    <label class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 dark:text-slate-100 sm:text-right">
                         Gender <span class="text-red-600">*</span>
                     </label>
                     <div class="flex-1">
@@ -230,7 +233,7 @@
 
                 <!-- Marital Status -->
                 <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-                    <label for="marital_status" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 sm:text-right">
+                    <label for="marital_status" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 dark:text-slate-100 sm:text-right">
                         Marital Status
                     </label>
                     <div class="flex-1">
@@ -248,7 +251,7 @@
 
                 <!-- Spouse Name English -->
                 <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-                    <label for="spouse_name_english" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 sm:text-right">
+                    <label for="spouse_name_english" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 dark:text-slate-100 sm:text-right">
                         Spouse Name(English)
                     </label>
                     <div class="flex-1">
@@ -261,7 +264,7 @@
 
                 <!-- Spouse Name Bangla -->
                 <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-                    <label for="spouse_name_bangla" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 sm:text-right">
+                    <label for="spouse_name_bangla" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 dark:text-slate-100 sm:text-right">
                         Spouse Name(Bangla)
                     </label>
                     <div class="flex-1">
@@ -274,7 +277,7 @@
 
                 <!-- Occupation -->
                 <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-                    <label for="occupation" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 sm:text-right">
+                    <label for="occupation" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 dark:text-slate-100 sm:text-right">
                         Occupation
                     </label>
                     <div class="flex-1">
@@ -287,7 +290,7 @@
 
                 <!-- Blood Group -->
                 <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-                    <label for="blood_group" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 sm:text-right">
+                    <label for="blood_group" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 dark:text-slate-100 sm:text-right">
                         Blood Group <span class="text-red-600">*</span>
                     </label>
                     <div class="flex-1">
@@ -325,7 +328,7 @@
 
                 <!-- Present Village -->
                 <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-                    <label for="present_village" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 sm:text-right">
+                    <label for="present_village" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 dark:text-slate-100 sm:text-right">
                         Village/House <span class="text-red-600">*</span>
                     </label>
                     <div class="flex-1">
@@ -338,7 +341,7 @@
 
                 <!-- Permanent Village -->
                 <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-                    <label for="permanent_village" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 sm:text-right">
+                    <label for="permanent_village" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 dark:text-slate-100 sm:text-right">
                         Village/House
                     </label>
                     <div class="flex-1">
@@ -350,7 +353,7 @@
 
                 <!-- Present Road -->
                 <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-                    <label for="present_road" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 sm:text-right">
+                    <label for="present_road" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 dark:text-slate-100 sm:text-right">
                         Road/Block/Sector <span class="text-red-600">*</span>
                     </label>
                     <div class="flex-1">
@@ -363,7 +366,7 @@
 
                 <!-- Permanent Road -->
                 <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-                    <label for="permanent_road" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 sm:text-right">
+                    <label for="permanent_road" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 dark:text-slate-100 sm:text-right">
                         Road/Block/Sector
                     </label>
                     <div class="flex-1">
@@ -375,7 +378,7 @@
 
                 <!-- Present Division -->
                 <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-                    <label for="present_division" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 sm:text-right">
+                    <label for="present_division" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 dark:text-slate-100 sm:text-right">
                         Division <span class="text-red-600">*</span>
                     </label>
                     <div class="flex-1">
@@ -397,7 +400,7 @@
 
                 <!-- Permanent Division -->
                 <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-                    <label for="permanent_division" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 sm:text-right">
+                    <label for="permanent_division" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 dark:text-slate-100 sm:text-right">
                         Division
                     </label>
                     <div class="flex-1">
@@ -419,7 +422,7 @@
 
                 <!-- Present District -->
                 <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-                    <label for="present_district" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 sm:text-right">
+                    <label for="present_district" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 dark:text-slate-100 sm:text-right">
                         District <span class="text-red-600">*</span>
                     </label>
                     <div class="flex-1">
@@ -437,7 +440,7 @@
 
                 <!-- Permanent District -->
                 <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-                    <label for="permanent_district" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 sm:text-right">
+                    <label for="permanent_district" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 dark:text-slate-100 sm:text-right">
                         District
                     </label>
                     <div class="flex-1">
@@ -455,7 +458,7 @@
 
                 <!-- Present Thana -->
                 <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-                    <label for="present_thana" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 sm:text-right">
+                    <label for="present_thana" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 dark:text-slate-100 sm:text-right">
                         Thana <span class="text-red-600">*</span>
                     </label>
                     <div class="flex-1">
@@ -472,7 +475,7 @@
 
                 <!-- Permanent Thana -->
                 <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-                    <label for="permanent_thana" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 sm:text-right">
+                    <label for="permanent_thana" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 dark:text-slate-100 sm:text-right">
                         Thana
                     </label>
                     <div class="flex-1">
@@ -489,7 +492,7 @@
 
                 <!-- Present Post Code -->
                 <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-                    <label for="present_post_code" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 sm:text-right">
+                    <label for="present_post_code" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 dark:text-slate-100 sm:text-right">
                         Post Code
                     </label>
                     <div class="flex-1">
@@ -502,7 +505,7 @@
 
                 <!-- Permanent Post Code -->
                 <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-                    <label for="permanent_post_code" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 sm:text-right">
+                    <label for="permanent_post_code" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 dark:text-slate-100 sm:text-right">
                         Post Code
                     </label>
                     <div class="flex-1">
@@ -519,7 +522,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 mt-8">
 
                 <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-                    <label for="nationality" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 sm:text-right">
+                    <label for="nationality" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 dark:text-slate-100 sm:text-right">
                         Nationality <span class="text-red-600">*</span>
                     </label>
                     <div class="flex-1">
@@ -537,7 +540,7 @@
                 </div>
 
                 <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-                    <label class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 sm:text-right">
+                    <label class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 dark:text-slate-100 sm:text-right">
                         Other Citizenship
                     </label>
                     <div class="flex-1">
@@ -559,7 +562,7 @@
 
                 <!-- Other Citizenship Name -->
                 <div id="other_citizenship_wrapper" class="md:col-span-2 hidden flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-                    <label for="other_citizenship" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 sm:text-right">
+                    <label for="other_citizenship" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 dark:text-slate-100 sm:text-right">
                         Other Citizenship
                     </label>
                     <div class="flex-1">
@@ -586,7 +589,7 @@
 
                 <!-- Phone Residence -->
                 <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-                    <label for="phone_residence" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 sm:text-right">
+                    <label for="phone_residence" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 dark:text-slate-100 sm:text-right">
                         Phone Number(Residence)
                     </label>
                     <div class="flex-1">
@@ -599,7 +602,7 @@
 
                 <!-- Emergency Name -->
                 <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-                    <label for="emergency_name" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 sm:text-right">
+                    <label for="emergency_name" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 dark:text-slate-100 sm:text-right">
                         Name <span class="text-red-600">*</span>
                     </label>
                     <div class="flex-1">
@@ -612,7 +615,7 @@
 
                 <!-- Mobile -->
                 <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-                    <label for="mobile" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 sm:text-right">
+                    <label for="mobile" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 dark:text-slate-100 sm:text-right">
                         Mobile No <span class="text-red-600">*</span>
                     </label>
                     <div class="flex-1">
@@ -625,7 +628,7 @@
 
                 <!-- Emergency Relationship -->
                 <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-                    <label for="emergency_relationship" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 sm:text-right">
+                    <label for="emergency_relationship" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 dark:text-slate-100 sm:text-right">
                         Relationship <span class="text-red-600">*</span>
                     </label>
                     <div class="flex-1">
@@ -646,7 +649,7 @@
 
                 <!-- Phone Office -->
                 <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-                    <label for="phone_office" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 sm:text-right">
+                    <label for="phone_office" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 dark:text-slate-100 sm:text-right">
                         Phone Number(Office)
                     </label>
                     <div class="flex-1">
@@ -659,7 +662,7 @@
 
                 <!-- Emergency Mobile -->
                 <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-                    <label for="emergency_mobile" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 sm:text-right">
+                    <label for="emergency_mobile" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 dark:text-slate-100 sm:text-right">
                         Mobile No <span class="text-red-600">*</span>
                     </label>
                     <div class="flex-1">
@@ -672,7 +675,7 @@
 
                 <!-- Email -->
                 <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-                    <label for="email" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 sm:text-right">
+                    <label for="email" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 dark:text-slate-100 sm:text-right">
                         Email <span class="text-red-600">*</span>
                     </label>
                     <div class="flex-1">
@@ -685,7 +688,7 @@
 
                 <!-- Emergency Email -->
                 <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-                    <label for="emergency_email" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 sm:text-right">
+                    <label for="emergency_email" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 dark:text-slate-100 sm:text-right">
                         Email
                     </label>
                     <div class="flex-1">
@@ -701,7 +704,7 @@
         </div>
 
         <!-- SECTION B -->
-        <div class="bg-white border border-gray-300 p-6 mb-4">
+        <div class="bg-white border border-gray-300 p-6 mb-4 dark:border-slate-700 dark:bg-slate-900">
 
             <h2 class="text-base font-bold uppercase tracking-wide text-emerald-800 pb-2 border-b-2 border-emerald-700 mb-1">
                 Section B
@@ -714,7 +717,7 @@
 
                 <!-- Instructor's Driving License No -->
                 <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-                    <label for="instructor_license_no" class="sm:w-52 shrink-0 text-sm font-semibold text-gray-800 sm:text-right">
+                    <label for="instructor_license_no" class="sm:w-52 shrink-0 text-sm font-semibold text-gray-800 dark:text-slate-100 sm:text-right">
                         Instructor's Driving license No
                     </label>
                     <div class="flex-1">
@@ -727,7 +730,7 @@
 
                 <!-- Exam Venue -->
                 <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-                    <label for="exam_venue" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 sm:text-right">
+                    <label for="exam_venue" class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 dark:text-slate-100 sm:text-right">
                         Exam Venue <span class="text-red-600">*</span>
                     </label>
                     <div class="flex-1">
@@ -745,7 +748,7 @@
 
                 <!-- Vehicle Class -->
                 <div class="md:col-span-2 flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-                    <label class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 sm:text-right">
+                    <label class="sm:w-44 shrink-0 text-sm font-semibold text-gray-800 dark:text-slate-100 sm:text-right">
                         Vehicle Class <span class="text-red-600">*</span>
                     </label>
                     <div class="flex-1">
@@ -754,13 +757,13 @@
                                 <input type="checkbox" name="vehicle_class[]" value="motorcycle"
                                        class="rounded border-gray-400 text-blue-600 focus:ring-blue-500"
                                        {{ in_array('motorcycle', old('vehicle_class', [])) ? 'checked' : '' }}>
-                                <span class="text-sm text-gray-800 font-medium">MOTORCYCLE</span>
+                                <span class="text-sm text-gray-800 dark:text-slate-100 font-medium">MOTORCYCLE</span>
                             </label>
                             <label class="flex items-center gap-2 cursor-pointer">
                                 <input type="checkbox" name="vehicle_class[]" value="light"
                                        class="rounded border-gray-400 text-blue-600 focus:ring-blue-500"
                                        {{ in_array('light', old('vehicle_class', [])) ? 'checked' : '' }}>
-                                <span class="text-sm text-gray-800 font-medium">LIGHT</span>
+                                <span class="text-sm text-gray-800 dark:text-slate-100 font-medium">LIGHT</span>
                             </label>
                         </div>
                         @error('vehicle_class')<p class="mt-1 text-sm text-red-600">{{ $message }}</p>@enderror
@@ -779,7 +782,7 @@
 
                 <!-- Medical Certificate -->
                 <div class="flex flex-col md:flex-row md:items-center gap-1 md:gap-4">
-                    <label for="medical_certificate" class="md:w-96 shrink-0 text-sm font-semibold text-gray-800">
+                    <label for="medical_certificate" class="md:w-96 shrink-0 text-sm font-semibold text-gray-800 dark:text-slate-100">
                         Attach Medical Certificate. <span class="text-red-600">*</span>
                     </label>
                     <div class="flex flex-wrap items-center gap-3">
@@ -792,7 +795,7 @@
 
                 <!-- NID / Birth Certificate / Passport / Citizen Certificate -->
                 <div class="flex flex-col md:flex-row md:items-center gap-1 md:gap-4">
-                    <label for="nid_document" class="md:w-96 shrink-0 text-sm font-semibold text-gray-800">
+                    <label for="nid_document" class="md:w-96 shrink-0 text-sm font-semibold text-gray-800 dark:text-slate-100">
                         Attach National Id/Birth Certificate/Passport/Citizen Certificate <span class="text-red-600">*</span>
                     </label>
                     <div class="flex flex-wrap items-center gap-3">
@@ -805,7 +808,7 @@
 
                 <!-- Utility Bill -->
                 <div class="flex flex-col md:flex-row md:items-center gap-1 md:gap-4">
-                    <label for="utility_bill" class="md:w-96 shrink-0 text-sm font-semibold text-gray-800">
+                    <label for="utility_bill" class="md:w-96 shrink-0 text-sm font-semibold text-gray-800 dark:text-slate-100">
                         Attach Utility bill
                     </label>
                     <div class="flex flex-wrap items-center gap-3">

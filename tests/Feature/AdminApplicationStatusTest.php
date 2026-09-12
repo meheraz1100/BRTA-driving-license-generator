@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Models\Application;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
 class AdminApplicationStatusTest extends TestCase
@@ -13,6 +14,8 @@ class AdminApplicationStatusTest extends TestCase
 
     public function test_admin_can_approve_pending_application(): void
     {
+        Mail::fake();
+
         $admin = User::factory()->create([
             'role' => 'admin',
         ]);
@@ -67,7 +70,6 @@ class AdminApplicationStatusTest extends TestCase
             'rejection_reason' => 'Required documents are incomplete.',
         ]);
     }
-
 
     public function test_admin_cannot_approve_already_rejected_application(): void
     {

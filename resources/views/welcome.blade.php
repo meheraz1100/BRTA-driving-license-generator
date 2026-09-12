@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" @class(['dark' => ($theme ?? 'light') === 'dark'])>
 
 <head>
     <meta charset="UTF-8">
@@ -24,81 +24,9 @@
 </head>
 
 
-<body class="min-h-screen bg-slate-950   antialiased">
+<body class="min-h-screen bg-white text-slate-900 antialiased dark:bg-slate-950 dark:text-white">
 
-    <!-- ========================================================= -->
-    <!-- NAVBAR -->
-    <!-- ========================================================= -->
-
-    <nav class="sticky top-0 z-50 border-b border-white/[0.08]
-                bg-slate-950/80 backdrop-blur-xl">
-
-        <div class="mx-auto flex h-18 max-w-7xl items-center
-                    justify-between px-5 sm:px-6 lg:px-8">
-
-            <!-- Logo -->
-            <a
-                href="{{ route('home') }}"
-                class="group flex items-center gap-3"
-            >
-
-                <div class="flex h-9 w-9 items-center justify-center
-                            rounded-xl bg-blue-600 shadow-lg
-                            shadow-blue-600/20 transition
-                            group-hover:scale-105">
-
-                    <svg
-                        class="h-5 w-5  "
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                    >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M8 7V5a4 4 0 018 0v2m-9 0h10a2 2 0 012 2v9a2 2 0 01-2 2H7a2 2 0 01-2-2V9a2 2 0 012-2z"
-                        />
-                    </svg>
-
-                </div>
-
-                <div class="text-base font-bold tracking-tight sm:text-lg">
-                    Learner<span class="text-blue-400">Portal</span>
-                </div>
-
-            </a>
-
-
-            <!-- Navigation -->
-            <div class="flex items-center gap-1.5 sm:gap-3">
-
-                <a
-                    href="{{ route('login') }}"
-                    class="rounded-xl px-3 py-2 text-sm font-medium
-                           text-slate-300 transition
-                           hover:bg-white/[0.06] hover: 
-                           sm:px-4"
-                >
-                    Login
-                </a>
-
-                <a
-                    href="{{ route('register') }}"
-                    class="rounded-xl bg-white px-4 py-2 text-sm
-                           font-semibold text-slate-950 shadow-lg
-                           shadow-white/5 transition
-                           hover:bg-slate-200 hover:shadow-white/10
-                           sm:px-5"
-                >
-                    Register
-                </a>
-
-            </div>
-
-        </div>
-
-    </nav>
+    <x-app-navbar />
 
 
     <!-- ========================================================= -->
@@ -201,7 +129,7 @@
                                 sm:flex-row sm:items-center">
 
                         <a
-                            href="{{ route('login') }}"
+                            href="{{ auth()->check() ? route('application') : route('login') }}"
                             class="group inline-flex items-center
                                    justify-center rounded-xl
                                    bg-blue-600 px-6 py-3.5
@@ -235,7 +163,7 @@
 
 
                         <a
-                            href="{{ route('register') }}"
+                            href="{{ auth()->check() ? route('my-applications') : route('register') }}"
                             class="inline-flex items-center
                                    justify-center rounded-xl
                                    border border-white/10
@@ -248,7 +176,7 @@
                                    hover:bg-white/[0.08]
                                    sm:px-7"
                         >
-                            Create Account
+                            {{ auth()->check() ? 'My Applications' : 'Create Account' }}
                         </a>
 
                     </div>
@@ -338,8 +266,8 @@
                 <div class="mx-auto mt-16 max-w-5xl sm:mt-20">
 
                     <div class="relative rounded-2xl border
-                                border-white/[0.08]
-                                bg-white/[0.025] p-2
+                                border-slate-200 dark:border-white/10
+                                bg-slate-50 dark:bg-white/[0.025] p-2
                                 shadow-2xl shadow-blue-950/30
                                 backdrop-blur-xl
                                 sm:rounded-3xl sm:p-3">
@@ -379,7 +307,7 @@
 
                                 <div class="hidden rounded-xl
                                             border border-white/[0.06]
-                                            bg-white/[0.025]
+                                            bg-slate-50 dark:bg-white/[0.025]
                                             p-5 sm:block">
 
                                     <div class="h-3 w-20 rounded
@@ -509,8 +437,8 @@
         <!-- FEATURES -->
         <!-- ========================================================= -->
 
-        <section class="relative border-t border-white/[0.07]
-                        bg-slate-900/40">
+        <section class="relative border-t border-slate-200 dark:border-white/10
+                        bg-slate-50 dark:bg-slate-900/40">
 
             <div class="mx-auto max-w-7xl px-5 py-20
                         sm:px-6 sm:py-24
@@ -543,8 +471,8 @@
 
                     <!-- Card 1 -->
                     <div class="group relative overflow-hidden
-                                rounded-2xl border border-white/[0.08]
-                                bg-white/[0.025] p-7
+                                rounded-2xl border border-slate-200 dark:border-white/10
+                                bg-slate-50 dark:bg-white/[0.025] p-7
                                 transition-all duration-300
                                 hover:-translate-y-1
                                 hover:border-blue-500/20
@@ -595,8 +523,8 @@
 
                     <!-- Card 2 -->
                     <div class="group relative overflow-hidden
-                                rounded-2xl border border-white/[0.08]
-                                bg-white/[0.025] p-7
+                                rounded-2xl border border-slate-200 dark:border-white/10
+                                bg-slate-50 dark:bg-white/[0.025] p-7
                                 transition-all duration-300
                                 hover:-translate-y-1
                                 hover:border-indigo-500/20
@@ -647,8 +575,8 @@
 
                     <!-- Card 3 -->
                     <div class="group relative overflow-hidden
-                                rounded-2xl border border-white/[0.08]
-                                bg-white/[0.025] p-7
+                                rounded-2xl border border-slate-200 dark:border-white/10
+                                bg-slate-50 dark:bg-white/[0.025] p-7
                                 transition-all duration-300
                                 hover:-translate-y-1
                                 hover:border-emerald-500/20
@@ -707,7 +635,7 @@
         <!-- HOW IT WORKS -->
         <!-- ========================================================= -->
 
-        <section class="border-t border-white/[0.07]">
+        <section class="border-t border-slate-200 dark:border-white/10">
 
             <div class="mx-auto max-w-7xl px-5 py-20
                         sm:px-6 sm:py-24
@@ -839,7 +767,7 @@
 
 
                         <div class="relative rounded-3xl border
-                                    border-white/[0.08]
+                                    border-slate-200 dark:border-white/10
                                     bg-slate-900/80 p-6
                                     shadow-2xl
                                     backdrop-blur-xl sm:p-8">
@@ -872,7 +800,7 @@
 
                                 <div class="rounded-xl border
                                             border-white/[0.06]
-                                            bg-white/[0.025] p-4">
+                                            bg-slate-50 dark:bg-white/[0.025] p-4">
 
                                     <div class="flex items-center
                                                 justify-between">
@@ -905,7 +833,7 @@
 
                                     <div class="rounded-xl border
                                                 border-white/[0.06]
-                                                bg-white/[0.025] p-4">
+                                                bg-slate-50 dark:bg-white/[0.025] p-4">
 
                                         <p class="text-xs text-slate-500">
                                             STATUS
@@ -921,7 +849,7 @@
 
                                     <div class="rounded-xl border
                                                 border-white/[0.06]
-                                                bg-white/[0.025] p-4">
+                                                bg-slate-50 dark:bg-white/[0.025] p-4">
 
                                         <p class="text-xs text-slate-500">
                                             ACCESS
@@ -1034,13 +962,13 @@
                                 gap-3 sm:flex-row">
 
                         <a
-                            href="{{ route('register') }}"
+                            href="{{ auth()->check() ? route('application') : route('register') }}"
                             class="inline-flex items-center justify-center
                                    rounded-xl bg-white px-6 py-3.5
                                    text-sm font-bold text-slate-950
                                    transition hover:bg-slate-200"
                         >
-                            Create Your Account
+                            {{ auth()->check() ? 'Continue Application' : 'Create Your Account' }}
 
                             <svg
                                 class="ml-2 h-4 w-4"
@@ -1073,7 +1001,7 @@
     <!-- FOOTER -->
     <!-- ========================================================= -->
 
-    <footer class="border-t border-white/[0.07]">
+    <footer class="border-t border-slate-200 dark:border-white/10">
 
         <div class="mx-auto max-w-7xl px-5 py-8
                     sm:px-6 lg:px-8">

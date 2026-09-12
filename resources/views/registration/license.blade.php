@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" @class(['dark' => ($theme ?? 'light') === 'dark'])>
 
 <head>
     <meta charset="UTF-8">
@@ -8,6 +8,8 @@
     <title>
         Learner License Card - {{ $application->application_no }}
     </title>
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
@@ -26,6 +28,10 @@
             margin: 0;
             font-family: Arial, Helvetica, sans-serif;
             background: #e5e7eb;
+        }
+
+        html.dark body {
+            background: #020617;
         }
 
         .card {
@@ -163,6 +169,8 @@
 </head>
 
 <body>
+
+    <x-app-navbar />
 
 <!-- Controls -->
     <div class="no-print flex justify-center gap-3 py-8">
@@ -561,48 +569,7 @@ font-weight: 500;">Bangladesh Road Transport Authority</p>
             </div>
 
 
-            <!-- Footer -->
-
-            <!-- <div class="absolute bottom-0 left-0 right-0 z-10 border-t border-slate-300 bg-white/90 px-10 py-5">
-
-                <div class="flex items-center justify-between">
-
-                    <div class="max-w-155">
-
-                        <div class="text-[10px] font-black uppercase tracking-wider text-green-600">
-                            A VALID DRIVING LICENCE
-                        </div>
-
-                        <div class="mt-1 text-[9px] leading-4 text-slate-500">
-
-
-                            It is an official government
-                            driving licence document.
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="flex h-16 w-16 items-center justify-center rounded-lg border-2 border-dashed border-slate-400">
-
-                        <div class="text-center">
-
-                            <div class="text-[8px] font-black text-slate-500">
-                                VALID
-                            </div>
-
-                            <div class="text-[7px] text-slate-400">
-                                CARD
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div> -->
+            
 
         </div>
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" @class(['dark' => ($theme ?? 'light') === 'dark'])>
 
 <head>
     <meta charset="UTF-8">
@@ -19,12 +19,14 @@
     ])
 </head>
 
-<body class="bg-gray-50 min-h-screen">
+<body class="bg-gray-50 min-h-screen dark:bg-slate-950">
+
+    <x-app-navbar />
 
     <div class="max-w-6xl mx-auto px-4 py-8">
 
         <!-- Success Header -->
-        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6 dark:border-slate-700 dark:bg-slate-900">
 
             <div class="flex items-start gap-4">
 
@@ -72,6 +74,20 @@
                         <span class="font-semibold text-blue-700">
                             {{ $application->application_no }}
                         </span>
+                        
+
+                    </div>
+                    <div class="mt-4 inline-flex items-center
+                                rounded-lg bg-blue-50 px-4 py-2">
+
+                        <span class="text-sm text-gray-600 mr-2">
+                            Application Status
+                        </span>
+
+                        <span class="font-semibold text-green-700 capitalize">
+                            {{ $application->status }}
+                        </span>
+                        
 
                     </div>
 
@@ -83,7 +99,7 @@
 
 
         <!-- Personal Information -->
-        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6 dark:border-slate-700 dark:bg-slate-900">
 
             <h2 class="text-lg font-semibold text-gray-800 mb-5">
                 Personal Information
@@ -206,7 +222,7 @@
 
 
         <!-- Address -->
-        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6 dark:border-slate-700 dark:bg-slate-900">
 
             <h2 class="text-lg font-semibold text-gray-800 mb-5">
                 Address Information
@@ -289,7 +305,7 @@
 
 
         <!-- Contact -->
-        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6 dark:border-slate-700 dark:bg-slate-900">
 
             <h2 class="text-lg font-semibold text-gray-800 mb-5">
                 Contact Information
@@ -346,7 +362,7 @@
 
 
         <!-- Licensing -->
-        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6 dark:border-slate-700 dark:bg-slate-900">
 
             <h2 class="text-lg font-semibold text-gray-800 mb-5">
                 Licensing & Examination
@@ -412,39 +428,7 @@
         </div>
 
 
-        <!-- Generate License -->
-        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-
-            <div class="flex flex-col md:flex-row
-                        md:items-center md:justify-between gap-4">
-
-                <div>
-
-                    <h2 class="text-lg font-semibold text-gray-800">
-                        Learner License Card
-                    </h2>
-
-                    <p class="text-sm text-gray-500 mt-1">
-                        Review your submitted information before generating
-                        your learner license card.
-                    </p>
-
-                </div>
-
-
-                <a
-                    href="{{ route('application.license', $application) }}"
-                    class="inline-flex items-center justify-center
-                           px-6 py-2.5 rounded-lg
-                           bg-blue-600 text-white font-medium
-                           hover:bg-blue-700 transition"
-                >
-                    Generate License
-                </a>
-
-            </div>
-
-        </div>
+        
 
     </div>
 
