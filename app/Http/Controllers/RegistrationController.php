@@ -6,7 +6,7 @@ use App\Models\Application;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Gate;
-use Barryvdh\DomPDF\Facade\Pdf;
+use Mpdf\Mpdf;
 
 class RegistrationController extends Controller
 {
@@ -392,14 +392,41 @@ class RegistrationController extends Controller
 
         abort_unless($application->status === 'approved', 403);
 
-        $pdf = Pdf::loadView('registration.license-pdf', [
+        $html = view('registration.license-pdf', [
             'application' => $application,
+        ])->render();
+
+        $tempDir = storage_path('app/mpdf');
+
+        if (! is_dir($tempDir)) {
+            mkdir($tempDir, 0755, true);
+        }
+
+        $mpdf = new Mpdf([
+            'format' => 'A4-L',
+            'tempDir' => $tempDir,
+            'mode' => 'utf-8',
+            'margin_left' => 10,
+            'margin_right' => 10,
+            'margin_top' => 10,
+            'margin_bottom' => 10,
         ]);
 
-        $pdf->setPaper('A4', 'landscape');
+        $mpdf->WriteHTML($html);
 
-        return $pdf->download(
-            'Learner-License-' . $application->application_no . '.pdf'
+        return response(
+            $mpdf->Output(
+                'Learner-License-' . $application->application_no . '.pdf',
+                'S'
+            ),
+            200,
+            [
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' =>
+                'attachment; filename="Learner-License-' .
+                    $application->application_no .
+                    '.pdf"',
+            ]
         );
     }
 }

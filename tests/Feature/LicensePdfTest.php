@@ -30,4 +30,19 @@ class LicensePdfTest extends TestCase
             $response->headers->get('Content-Type')
         );
     }
+
+    public function test_pending_application_cannot_download_license_pdf(): void
+    {
+        $user = User::factory()->create();
+
+        $application = Application::factory()->create([
+            'user_id' => $user->id,
+            'status' => 'pending',
+        ]);
+
+        $response = $this->actingAs($user)
+            ->get(route('application.license.pdf', $application));
+
+        $response->assertForbidden();
+    }
 }

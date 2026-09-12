@@ -1,37 +1,19 @@
-<?php
+<x-mail::message>
+# Application Approved
 
-namespace App\Mail;
+Dear {{ $application->name_english }},
 
-use App\Models\Application;
-use Barryvdh\DomPDF\Facade\Pdf;
-use Illuminate\Bus\Queueable;
-use Illuminate\Mail\Mailable;
-use Illuminate\Queue\SerializesModels;
+কংগ্রাচুলেশন. আপনি আপনার নকল ড্রাইভিং লাইসেন্স পেয়ে গেছেন। 
+সাবধান ঃ রাস্তা-ঘাঁটে পুলিশকে ভুলেও দেখাবেন না। ডান্ডার বাড়ি একটাও মাটিতে পড়বে না। 
 
-class ApplicationApprovedMail extends Mailable
-{
-    use Queueable, SerializesModels;
+**Application Number:** {{ $application->application_no }}
 
-    public function __construct(
-        public Application $application
-    ) {
-    }
+**Status:** Approved
 
-    public function build()
-    {
-        $pdf = Pdf::loadView('registration.license-pdf', [
-            'application' => $this->application,
-        ]);
+Your Fake BRTA license PDF is attached to this email.
 
-        return $this
-            ->subject('Your Learner License Application Has Been Approved')
-            ->view('emails.application-approved')
-            ->attachData(
-                $pdf->output(),
-                'Learner-License-' . $this->application->application_no . '.pdf',
-                [
-                    'mime' => 'application/pdf',
-                ]
-            );
-    }
-}
+Please keep the attached PDF for your records.
+
+Thanks,<br>
+BRTA Fake License Team
+</x-mail::message>

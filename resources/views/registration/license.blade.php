@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" @class(['dark' => ($theme ?? 'light') === 'dark'])>
+<html lang="en" @class(['dark'=> ($theme ?? 'light') === 'dark'])>
 
 <head>
     <meta charset="UTF-8">
@@ -172,14 +172,14 @@
 
     <x-app-navbar />
 
-<!-- Controls -->
+    <!-- Controls -->
     <div class="no-print flex justify-center gap-3 py-8">
 
         <p>Hey, {{ $application->name_english }}. Download Your Driving License and Fly in Your Road.</p>
 
     </div>
 
-    
+
 
 
     <!-- ========================= -->
@@ -292,10 +292,7 @@
 
                     </div>
 
-                    <div class="mt-12 text-center text-[15px] text-slate-700"
-                        style="font-family: 'Brush Script MT', 'Segoe Script', cursive;">
-                        {{ $application->name_english }}
-                    </div>
+                    
 
                 </div>
 
@@ -531,7 +528,7 @@ font-weight: 500;">Bangladesh Road Transport Authority</p>
 
                 <!-- Vehicle Classes -->
 
-                
+
 
 
 
@@ -539,11 +536,11 @@ font-weight: 500;">Bangladesh Road Transport Authority</p>
 
                 <div>
                     <div class=" text-[#752c41] col-span-2">
-                    Prefix of the licence number is district code and suffix is symbol of authorized vehicle class.
-                    If lost or found, please inform Police Station.
-                    Red background - Professional
-                    Green background - Non-professional
-                </div>
+                        Prefix of the licence number is district code and suffix is symbol of authorized vehicle class.
+                        If lost or found, please inform Police Station.
+                        Red background - Professional
+                        Green background - Non-professional
+                    </div>
 
                     <svg
                         id="application-barcode"
@@ -560,7 +557,7 @@ font-weight: 500;">Bangladesh Road Transport Authority</p>
                         src="{{ asset('/storage/asset/images/v-class.jpg') }}"
                         alt="Mobile"
                         class="ml-5  h-40 rounded-xl object-contain">
-                    
+
                     <p class="ml-5">Ref. No. {{ $application->application_no }}</p>
                     <p class="ml-5">First Issue {{ now()->format('d/m/Y') }}</p>
 
@@ -569,11 +566,11 @@ font-weight: 500;">Bangladesh Road Transport Authority</p>
             </div>
 
 
-            
+
 
         </div>
 
-        
+
 
     </div>
 
@@ -607,7 +604,7 @@ font-weight: 500;">Bangladesh Road Transport Authority</p>
     . ' - ' . $application->present_post_code;
     @endphp
 
-    
+
 
     <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
 

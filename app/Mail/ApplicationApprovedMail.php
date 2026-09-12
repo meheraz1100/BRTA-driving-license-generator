@@ -15,12 +15,15 @@ class ApplicationApprovedMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public function __construct(public Application $application) {}
+    public function __construct(
+        public Application $application
+    ) {
+    }
 
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Your learner license has been approved',
+            subject: 'Your fake brta license has been approved',
         );
     }
 
@@ -31,17 +34,17 @@ class ApplicationApprovedMail extends Mailable
         );
     }
 
-    /**
-     * @return array<int, Attachment>
-     */
     public function attachments(): array
     {
-        $pdf = app(LicenseCardPdf::class)->render($this->application);
+        $pdf = app(LicenseCardPdf::class)
+            ->render($this->application);
 
         return [
             Attachment::fromData(
-                fn(): string => $pdf,
-                'learner-license-' . $this->application->application_no . '.pdf',
+                fn (): string => $pdf,
+                'fake-brta-license-' .
+                    $this->application->application_no .
+                    '.pdf',
             )->withMime('application/pdf'),
         ];
     }
